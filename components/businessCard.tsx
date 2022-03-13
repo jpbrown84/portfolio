@@ -307,11 +307,6 @@ const BusinessCard: FunctionComponent = () => {
         }
       }}
     >
-      <div className="test">
-        Using mobile: {usingMobileDevice ? "true" : "false"}
-      </div>
-      <div className="test">leftToRight: {deviceLeftToRight}</div>
-      <div className="test">frontToBack: {deviceFrontToBack}</div>
       {["front", "back"].map((face) => (
         <button
           key={face}
