@@ -213,12 +213,28 @@ const BusinessCard: FunctionComponent = () => {
   // is the email link hovered
   const [emailHovered, setEmailHovered] = useState(false);
 
+  // is the user using a mobile device?
+  const [usingMobileDevice, setUsingMobileDevice] = useState(false);
+
+  // states for mobile device rotation (IRL rotation using javascript)
+  const [deviceXRotation, setDeviceXRotation] = useState(0);
+  const [deviceYRotation, setDeviceYRotation] = useState(0);
+
   // when we have a scene div, measure it and assign the height and width to state
   useEffect(() => {
     if (sceneRef && sceneRef.current) {
       const sceneDimensions = sceneRef.current.getBoundingClientRect();
       setSceneWidth(sceneDimensions.width);
       setSceneHeight(sceneDimensions.height);
+    }
+  }, []);
+
+  // check to see if we're on a mobile device
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (/Mobi|Android/i.test(navigator.userAgent)) {
+        setUsingMobileDevice(true);
+      }
     }
   }, []);
 
@@ -244,6 +260,11 @@ const BusinessCard: FunctionComponent = () => {
         setRadialCenterY(100 - mouseYFromTop);
       }}
     >
+      <div className="test">
+        Using mobile: {usingMobileDevice ? "true" : "false"}
+      </div>
+      <div className="test">device Y: {deviceYRotation}</div>
+      <div className="test">device X: {deviceXRotation}</div>
       {["front", "back"].map((face) => (
         <button
           key={face}
