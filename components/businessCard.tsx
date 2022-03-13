@@ -402,8 +402,8 @@ const BusinessCard: FunctionComponent = () => {
                       usingMobileDevice
                         ? 100 -
                           (100 / 180) * extraXRotation +
-                          50 - deviceLeftToRight +
-
+                          50 -
+                          deviceLeftToRight
                         : 100 - (100 / 180) * extraXRotation + radialCenterX
                     }% ${
                       usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
