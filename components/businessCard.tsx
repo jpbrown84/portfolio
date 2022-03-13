@@ -256,35 +256,35 @@ const BusinessCard: FunctionComponent = () => {
     []
   );
 
-  // check to see if we're on a mobile device, and if we are, set a listener on our device orientation
+  // check to see if we're on a mobile device
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
-      /Mobi|Android/i.test(navigator.userAgent) &&
-      window.DeviceOrientationEvent
+      /Mobi|Android/i.test(navigator.userAgent)
     ) {
       setUsingMobileDevice(true);
-      window.addEventListener("deviceorientation", (event) => {
-        // alpha: rotation around z-axis
-        const rotateDegrees = event.alpha;
-        // gamma: left to right
-        const leftToRight = event.gamma;
-        // beta: front back motion
-        const frontToBack = event.beta;
-        handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
-      });
     }
+  }, []);
+
+  // if we're on a mobile device, set a listener on our device orientation
+  useEffect(() => {
+    window.addEventListener("deviceorientation", (event): any => {
+      // alpha: rotation around z-axis
+      const rotateDegrees = event.alpha;
+      // gamma: left to right
+      const leftToRight = event.gamma;
+      // beta: front back motion
+      const frontToBack = event.beta;
+      handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
+    });
+
     return () => {
-      window.removeEventListener("keydown", handleOrientationEvent as any);
+      window.removeEventListener(
+        "deviceorientation",
+        handleOrientationEvent as any
+      );
     };
   }, [handleOrientationEvent]);
-
-  // useEffect(() => {
-  //     window.addEventListener("keydown", handleUserKeyPress);
-  //     return () => {
-  //         window.removeEventListener("keydown", handleUserKeyPress);
-  //     };
-  // }, [handleUserKeyPress]);
 
   // this variable caps the amount of rotation of the card
   const rotationMultiplier = 0.15;
@@ -311,8 +311,9 @@ const BusinessCard: FunctionComponent = () => {
       <div className="test">
         Using mobile: {usingMobileDevice ? "true" : "false"}
       </div>
-      <div className="test">leftToRight: {deviceLeftToRight}</div>
       <div className="test">rotateDegrees: {deviceRotateDegrees}</div>
+      <div className="test">leftToRight: {deviceLeftToRight}</div>
+      <div className="test">frontToBack: {deviceFrontToBack}</div>
       {["front", "back"].map((face) => (
         <button
           key={face}
