@@ -225,7 +225,8 @@ const BusinessCard: FunctionComponent = () => {
   // states for mobile device rotation (IRL rotation using javascript)
   const [deviceFrontToBack, setDeviceFrontToBack] = useState(0);
   const [deviceLeftToRight, setDeviceLeftToRight] = useState(0);
-  const [deviceRotateDegrees, setDeviceRotateDegrees] = useState(0);
+
+  const [tester, setTester] = useState(0);
 
   // when we have a scene div, measure it and assign the height and width to state
   useEffect(() => {
@@ -238,22 +239,20 @@ const BusinessCard: FunctionComponent = () => {
 
   // if we have orientation events, set them to state
   const handleOrientationEvent = useCallback(
-    (
-      frontToBack: number | null,
-      leftToRight: number | null,
-      rotateDegrees: number | null
-    ) => {
+    (frontToBack: number | null, leftToRight: number | null) => {
       if (frontToBack) {
-        setDeviceFrontToBack(frontToBack);
+        const roundedFrontToBack = Math.round(frontToBack * 10) / 10;
+        if (deviceFrontToBack !== roundedFrontToBack)
+          setDeviceFrontToBack(roundedFrontToBack);
       }
       if (leftToRight) {
-        setDeviceLeftToRight(leftToRight);
-      }
-      if (rotateDegrees) {
-        setDeviceRotateDegrees(rotateDegrees);
+        const roundedLeftToRight = Math.round(leftToRight * 10) / 10;
+        if (deviceLeftToRight !== roundedLeftToRight) {
+          setDeviceLeftToRight(roundedLeftToRight);
+        }
       }
     },
-    []
+    [deviceFrontToBack, deviceLeftToRight]
   );
 
   // check to see if we're on a mobile device
@@ -268,14 +267,15 @@ const BusinessCard: FunctionComponent = () => {
 
   // if we're on a mobile device, set a listener on our device orientation
   useEffect(() => {
+    setTester((t) => t + 1);
     window.addEventListener("deviceorientation", (event): any => {
-      // alpha: rotation around z-axis
-      const rotateDegrees = event.alpha;
       // gamma: left to right
       const leftToRight = event.gamma;
       // beta: front back motion
       const frontToBack = event.beta;
-      handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
+      if (usingMobileDevice) {
+        handleOrientationEvent(frontToBack, leftToRight);
+      }
     });
 
     return () => {
@@ -284,7 +284,7 @@ const BusinessCard: FunctionComponent = () => {
         handleOrientationEvent as any
       );
     };
-  }, [handleOrientationEvent]);
+  }, [handleOrientationEvent, usingMobileDevice]);
 
   // this variable caps the amount of rotation of the card
   const rotationMultiplier = 0.15;
@@ -311,7 +311,7 @@ const BusinessCard: FunctionComponent = () => {
       <div className="test">
         Using mobile: {usingMobileDevice ? "true" : "false"}
       </div>
-      <div className="test">rotateDegrees: {deviceRotateDegrees}</div>
+      <div className="test">test increment: {tester}</div>
       <div className="test">leftToRight: {deviceLeftToRight}</div>
       <div className="test">frontToBack: {deviceFrontToBack}</div>
       {["front", "back"].map((face) => (
