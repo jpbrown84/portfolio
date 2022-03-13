@@ -149,6 +149,9 @@ const styles = css`
     .phoneSpacer {
       height: 25px;
     }
+    .underlineWrapper {
+      width: 201px;
+    }
   }
   @media screen and (max-width: 389px) {
     .card {
@@ -172,11 +175,11 @@ const styles = css`
     .flipSpacer {
       height: 20px;
     }
-    .flipText {
-      font-size: 12px;
-    }
     .phoneSpacer {
       height: 20px;
+    }
+    .underlineWrapper {
+      width: 176px;
     }
   }
 `;
