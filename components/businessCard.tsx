@@ -341,7 +341,7 @@ const BusinessCard: FunctionComponent = () => {
             boxShadow: usingMobileDevice
               ? `rgba(0, 0, 0, 0.33) ${deviceLeftToRight * 2}px ${
                   deviceFrontToBack * 2
-                }px 20px`
+                }px 30px`
               : "rgba(0, 0, 0, 0.33) 40px 40px 20px",
             // rotate our card in the X and Y plane depending on mouse position. Use the multiplier to cap the rotation
             transform:
