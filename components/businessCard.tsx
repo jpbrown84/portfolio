@@ -1,4 +1,10 @@
-import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import css from "styled-jsx/css";
 import stylingConfig from "../stylingConfig";
@@ -217,8 +223,9 @@ const BusinessCard: FunctionComponent = () => {
   const [usingMobileDevice, setUsingMobileDevice] = useState(false);
 
   // states for mobile device rotation (IRL rotation using javascript)
-  const [deviceXRotation, setDeviceXRotation] = useState(0);
-  const [deviceYRotation, setDeviceYRotation] = useState(0);
+  const [deviceFrontToBack, setDeviceFrontToBack] = useState(0);
+  const [deviceLeftToRight, setDeviceLeftToRight] = useState(0);
+  const [deviceRotateDegrees, setDeviceRotateDegrees] = useState(0);
 
   // when we have a scene div, measure it and assign the height and width to state
   useEffect(() => {
@@ -229,14 +236,55 @@ const BusinessCard: FunctionComponent = () => {
     }
   }, []);
 
-  // check to see if we're on a mobile device
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
-        setUsingMobileDevice(true);
+  // if we have orientation events, set them to state
+  const handleOrientationEvent = useCallback(
+    (
+      frontToBack: number | null,
+      leftToRight: number | null,
+      rotateDegrees: number | null
+    ) => {
+      if (frontToBack) {
+        setDeviceFrontToBack(frontToBack);
       }
+      if (leftToRight) {
+        setDeviceLeftToRight(leftToRight);
+      }
+      if (rotateDegrees) {
+        setDeviceRotateDegrees(rotateDegrees);
+      }
+    },
+    []
+  );
+
+  // check to see if we're on a mobile device, and if we are, set a listener on our device orientation
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      /Mobi|Android/i.test(navigator.userAgent) &&
+      window.DeviceOrientationEvent
+    ) {
+      setUsingMobileDevice(true);
+      window.addEventListener("deviceorientation", (event) => {
+        // alpha: rotation around z-axis
+        const rotateDegrees = event.alpha;
+        // gamma: left to right
+        const leftToRight = event.gamma;
+        // beta: front back motion
+        const frontToBack = event.beta;
+        handleOrientationEvent(frontToBack, leftToRight, rotateDegrees);
+      });
     }
-  }, []);
+    return () => {
+      window.removeEventListener("keydown", handleOrientationEvent as any);
+    };
+  }, [handleOrientationEvent]);
+
+  // useEffect(() => {
+  //     window.addEventListener("keydown", handleUserKeyPress);
+  //     return () => {
+  //         window.removeEventListener("keydown", handleUserKeyPress);
+  //     };
+  // }, [handleUserKeyPress]);
 
   // this variable caps the amount of rotation of the card
   const rotationMultiplier = 0.15;
@@ -263,8 +311,8 @@ const BusinessCard: FunctionComponent = () => {
       <div className="test">
         Using mobile: {usingMobileDevice ? "true" : "false"}
       </div>
-      <div className="test">device Y: {deviceYRotation}</div>
-      <div className="test">device X: {deviceXRotation}</div>
+      <div className="test">leftToRight: {deviceLeftToRight}</div>
+      <div className="test">rotateDegrees: {deviceRotateDegrees}</div>
       {["front", "back"].map((face) => (
         <button
           key={face}
