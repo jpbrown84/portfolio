@@ -294,18 +294,21 @@ const BusinessCard: FunctionComponent = () => {
       className="scene"
       ref={sceneRef}
       onMouseMove={(e) => {
-        // get the percentage of the mouse position from the center of the div
-        const mouseXFromCenter =
-          (100 / sceneWidth) * (e.clientX - sceneWidth / 2);
-        const mouseYFromCenter =
-          (100 / sceneHeight) * (e.clientY - sceneHeight / 2) * -1;
-        // get the percentage of the mouse position from the top left of the div
-        const mouseXFromLeft = (100 / sceneWidth) * e.clientX;
-        const mouseYFromTop = (100 / sceneHeight) * e.clientY;
-        setRotationX(mouseXFromCenter);
-        setRotationY(mouseYFromCenter);
-        setRadialCenterX(100 - mouseXFromLeft);
-        setRadialCenterY(100 - mouseYFromTop);
+        // if we're on desktop (otherwise we use device rotation)
+        if (!usingMobileDevice) {
+          // get the percentage of the mouse position from the center of the div
+          const mouseXFromCenter =
+            (100 / sceneWidth) * (e.clientX - sceneWidth / 2);
+          const mouseYFromCenter =
+            (100 / sceneHeight) * (e.clientY - sceneHeight / 2) * -1;
+          // get the percentage of the mouse position from the top left of the div
+          const mouseXFromLeft = (100 / sceneWidth) * e.clientX;
+          const mouseYFromTop = (100 / sceneHeight) * e.clientY;
+          setRotationX(mouseXFromCenter);
+          setRotationY(mouseYFromCenter);
+          setRadialCenterX(100 - mouseXFromLeft);
+          setRadialCenterY(100 - mouseYFromTop);
+        }
       }}
     >
       <div className="test">
@@ -349,25 +352,37 @@ const BusinessCard: FunctionComponent = () => {
             transform:
               face === "front"
                 ? `rotateY(${
-                    rotationX * rotationMultiplier + extraXRotation
-                  }deg) rotateX(${rotationY * rotationMultiplier}deg)`
+                    usingMobileDevice
+                      ? 0 + extraXRotation
+                      : rotationX * rotationMultiplier + extraXRotation
+                  }deg) rotateX(${
+                    usingMobileDevice ? 0 : rotationY * rotationMultiplier
+                  }deg)`
                 : `rotateY(${
-                    rotationX * rotationMultiplier + 180 + extraXRotation
-                  }deg) rotateX(${rotationY * rotationMultiplier}deg)`,
+                    usingMobileDevice
+                      ? 0 + 180 + extraXRotation
+                      : rotationX * rotationMultiplier + 180 + extraXRotation
+                  }deg) rotateX(${
+                    usingMobileDevice ? 0 : rotationY * rotationMultiplier
+                  }deg)`,
             // our radial background center should move as the card tilts
             backgroundImage:
               face === "front"
                 ? `radial-gradient(
             ellipse at ${
-              radialCenterX - (100 / 180) * extraXRotation
-            }% ${radialCenterY}%,
+              usingMobileDevice
+                ? deviceLeftToRight - (100 / 180) * extraXRotation
+                : radialCenterX - (100 / 180) * extraXRotation
+            }% ${usingMobileDevice ? deviceFrontToBack : radialCenterY}%,
             ${stylingConfig.colors.petiteOrchard},
             ${stylingConfig.colors.petiteOrchard}
           )`
                 : `radial-gradient(
             ellipse at ${
-              100 - (100 / 180) * extraXRotation + radialCenterX
-            }% ${radialCenterY}%,
+              usingMobileDevice
+                ? 100 - (100 / 180) * extraXRotation + deviceLeftToRight
+                : 100 - (100 / 180) * extraXRotation + radialCenterX
+            }% ${usingMobileDevice ? deviceFrontToBack : radialCenterY}%,
             ${stylingConfig.colors.petiteOrchard},
             ${stylingConfig.colors.petiteOrchard}
           )`,
