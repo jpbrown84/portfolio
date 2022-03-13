@@ -10,6 +10,7 @@ const styles = css`
     background-color: ${stylingConfig.colors.mineShaft};
     perspective: 700px;
     position: relative;
+    padding: 20px;
   }
   .card {
     position: absolute;
@@ -27,6 +28,7 @@ const styles = css`
     left: calc(50% - 212.5px);
     border-radius: 2px;
     cursor: url("repeat.svg"), auto;
+    overflow: hidden;
   }
   .face {
     position: relative;
@@ -37,7 +39,7 @@ const styles = css`
     width: 100%;
     filter: url(#wavy2);
     box-shadow: inset 0 0 10px ${stylingConfig.colors.matrix};
-    padding: 50px 0;
+    padding: 60px 0;
   }
   .name {
     text-transform: uppercase;
@@ -109,6 +111,73 @@ const styles = css`
   }
   .underline.right.hovered {
     clip-path: polygon(100% 0%, 50% 0, 50% 100%, 100% 100%);
+  }
+  .subSpacer {
+    height: 20px;
+  }
+  .phoneSpacer {
+    height: 30px;
+  }
+  .flipSpacer {
+    height: 40px;
+  }
+  @media screen and (max-width: 500px) {
+    .card {
+      width: 350px;
+      height: 220px;
+      top: calc(50% - 110px);
+      left: calc(50% - 175px);
+    }
+    .face {
+      padding: 40px 0;
+    }
+    .name {
+      font-size: 30px;
+    }
+    .subTitle {
+      font-size: 16px;
+    }
+    .subSpacer {
+      height: 15px;
+    }
+    .flipSpacer {
+      height: 30px;
+    }
+    .flipText {
+      font-size: 12px;
+    }
+    .phoneSpacer {
+      height: 25px;
+    }
+  }
+  @media screen and (max-width: 389px) {
+    .card {
+      width: 280px;
+      height: 200px;
+      top: calc(50% - 100px);
+      left: calc(50% - 140px);
+    }
+    .face {
+      padding: 35px 0;
+    }
+    .name {
+      font-size: 26px;
+    }
+    .subTitle {
+      font-size: 14px;
+    }
+    .subSpacer {
+      height: 10px;
+    }
+    .flipSpacer {
+      height: 20px;
+    }
+    .flipText {
+      font-size: 12px;
+    }
+    .phoneSpacer {
+      height: 20px;
+    }
   }
 `;
 
@@ -250,19 +319,16 @@ const BusinessCard: FunctionComponent = () => {
               WebkitBackgroundClip: "text",
             }}
           >
-            {face === "front" && (
+            {face === "front" && <h2 className="name">James Brown</h2>}
+            <br />
+            {face === "front" ? (
               <>
-                <h2 className="name">James Brown</h2>
-
-                <br />
+                <div className="subSpacer" />
+                <p className="subTitle">React Developer</p>
                 <br />
               </>
-            )}
-            {face === "front" ? (
-              <p className="subTitle">React Developer</p>
             ) : (
               <>
-                <br />
                 <div className="linkWrapper">
                   <a
                     role="link"
@@ -304,14 +370,12 @@ const BusinessCard: FunctionComponent = () => {
                     ))}
                   </div>
                 </div>
-                <br />
-                <br />
+                <div className="phoneSpacer" />
                 <p className="subTitle">(07445) 769690</p>
+                <br />
               </>
             )}
-            <br />
-            <br />
-            <br />
+            <div className="flipSpacer" />
             <p className="flipText">[ Click card to flip ]</p>
             <svg
               viewBox="0 0 200 130"
