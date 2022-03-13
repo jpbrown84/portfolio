@@ -26,7 +26,6 @@ const styles = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.33) 20px 40px 40px;
     transform-style: flat;
     font-family: ${stylingConfig.fonts.openSans};
     backface-visibility: hidden;
@@ -344,6 +343,9 @@ const BusinessCard: FunctionComponent = () => {
           }}
           className={`card ${face}`}
           style={{
+            boxShadow: usingMobileDevice
+              ? `rgba(0, 0, 0, 0.33) 20px ${deviceLeftToRight}px ${-deviceFrontToBack}px`
+              : "rgba(0, 0, 0, 0.33) 20px 40px 40px",
             // rotate our card in the X and Y plane depending on mouse position. Use the multiplier to cap the rotation
             transform:
               face === "front"
@@ -364,21 +366,26 @@ const BusinessCard: FunctionComponent = () => {
             // our radial background center should move as the card tilts
             backgroundImage:
               face === "front"
-                ? `radial-gradient(
-            ellipse at ${
-              usingMobileDevice
-                ? deviceLeftToRight + 50 - (100 / 180) * extraXRotation
-                : radialCenterX - (100 / 180) * extraXRotation
-            }% ${usingMobileDevice ? deviceFrontToBack + 50 : radialCenterY}%,
+                ? `radial-gradient(ellipse at ${
+                    usingMobileDevice
+                      ? 50 - deviceLeftToRight - (100 / 180) * extraXRotation
+                      : radialCenterX - (100 / 180) * extraXRotation
+                  }% ${
+                    usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
+                  }%,
             ${stylingConfig.colors.petiteOrchard},
             ${stylingConfig.colors.petiteOrchard}
           )`
-                : `radial-gradient(
-            ellipse at ${
-              usingMobileDevice
-                ? 100 - (100 / 180) * extraXRotation + deviceLeftToRight + 50
-                : 100 - (100 / 180) * extraXRotation + radialCenterX
-            }% ${usingMobileDevice ? deviceFrontToBack + 50 : radialCenterY}%,
+                : `radial-gradient(ellipse at ${
+                    usingMobileDevice
+                      ? 100 -
+                        (100 / 180) * extraXRotation +
+                        50 -
+                        deviceLeftToRight
+                      : 100 - (100 / 180) * extraXRotation + radialCenterX
+                  }% ${
+                    usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
+                  }%,
             ${stylingConfig.colors.petiteOrchard},
             ${stylingConfig.colors.petiteOrchard}
           )`,
@@ -396,7 +403,7 @@ const BusinessCard: FunctionComponent = () => {
                         : radialCenterX - (100 / 180) * extraXRotation
                     }% ${
                       usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
-                    }%, white,
+                    }%, ${stylingConfig.colors.copper},
                 ${stylingConfig.colors.craterBrown})`
                   : `radial-gradient(ellipse at ${
                       usingMobileDevice
@@ -407,7 +414,7 @@ const BusinessCard: FunctionComponent = () => {
                         : 100 - (100 / 180) * extraXRotation + radialCenterX
                     }% ${
                       usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
-                    }%, white,
+                    }%, ${stylingConfig.colors.copper},
                       ${stylingConfig.colors.craterBrown})`,
               color: "transparent",
               backgroundClip: "text",
