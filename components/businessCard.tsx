@@ -392,21 +392,21 @@ const BusinessCard: FunctionComponent = () => {
                 face === "front"
                   ? `radial-gradient(ellipse at ${
                       usingMobileDevice
-                        ? deviceLeftToRight + 50 - (100 / 180) * extraXRotation
+                        ? 50 - deviceLeftToRight - (100 / 180) * extraXRotation
                         : radialCenterX - (100 / 180) * extraXRotation
                     }% ${
-                      usingMobileDevice ? deviceFrontToBack + 50 : radialCenterY
+                      usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
                     }%, white,
                 ${stylingConfig.colors.craterBrown})`
                   : `radial-gradient(ellipse at ${
                       usingMobileDevice
                         ? 100 -
                           (100 / 180) * extraXRotation +
-                          deviceLeftToRight +
-                          50
+                          50 - deviceLeftToRight +
+
                         : 100 - (100 / 180) * extraXRotation + radialCenterX
                     }% ${
-                      usingMobileDevice ? deviceFrontToBack + 50 : radialCenterY
+                      usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
                     }%, white,
                       ${stylingConfig.colors.craterBrown})`,
               color: "transparent",
