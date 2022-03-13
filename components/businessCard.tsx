@@ -29,7 +29,7 @@ const styles = css`
     cursor: url("repeat.svg"), auto;
   }
   .face {
-    display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -37,6 +37,7 @@ const styles = css`
     width: 100%;
     filter: url(#wavy2);
     box-shadow: inset 0 0 10px ${stylingConfig.colors.matrix};
+    padding: 50px 0;
   }
   .name {
     text-transform: uppercase;
@@ -44,18 +45,21 @@ const styles = css`
     line-height: 48px;
     font-weight: 700;
     letter-spacing: 1px;
+    display: inline;
   }
   .subTitle {
     margin-top: 30px;
     font-family: ${stylingConfig.fonts.courierPrime};
     text-transform: uppercase;
     font-size: 18px;
+    display: inline;
   }
   .flipText {
     margin-top: 30px;
     font-family: ${stylingConfig.fonts.courierPrime};
     text-transform: uppercase;
     font-size: 13px;
+    display: inline;
   }
   .turbulence {
     position: absolute;
@@ -63,7 +67,7 @@ const styles = css`
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 0.2;
+    opacity: 0.15;
     pointer-events: none;
   }
   .lowercase {
@@ -72,15 +76,15 @@ const styles = css`
   .noTopMar {
     margin-top: 0;
   }
-
   .link {
     color: transparent;
     cursor: pointer;
   }
   .underlineWrapper {
-    width: 100%;
+    width: 224px;
     height: 2px;
     position: relative;
+    margin: 0 auto;
   }
   .underline {
     position: absolute;
@@ -179,18 +183,18 @@ const BusinessCard: FunctionComponent = () => {
               let increment = face === "front" ? 0 : 180;
               const incrementor = setInterval(() => {
                 if (face === "front") {
-                  increment += 1;
+                  increment += 3;
                   if (increment <= 180) {
                     setExtraXRotation(increment);
                   }
                 }
                 if (face === "back") {
-                  increment -= 1;
+                  increment -= 3;
                   if (increment >= 0) {
                     setExtraXRotation(increment);
                   }
                 }
-              }, 1000 / 180);
+              }, 1000 / 60);
               setTimeout(() => {
                 clearInterval(incrementor);
                 setFlipping(false);
@@ -246,11 +250,19 @@ const BusinessCard: FunctionComponent = () => {
               WebkitBackgroundClip: "text",
             }}
           >
-            {face === "front" && <h1 className="name">James Brown</h1>}
+            {face === "front" && (
+              <>
+                <h2 className="name">James Brown</h2>
+
+                <br />
+                <br />
+              </>
+            )}
             {face === "front" ? (
               <p className="subTitle">React Developer</p>
             ) : (
               <>
+                <br />
                 <div className="linkWrapper">
                   <a
                     role="link"
@@ -292,10 +304,14 @@ const BusinessCard: FunctionComponent = () => {
                     ))}
                   </div>
                 </div>
-
+                <br />
+                <br />
                 <p className="subTitle">(07445) 769690</p>
               </>
             )}
+            <br />
+            <br />
+            <br />
             <p className="flipText">[ Click card to flip ]</p>
             <svg
               viewBox="0 0 200 130"
