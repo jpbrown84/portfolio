@@ -339,7 +339,9 @@ const BusinessCard: FunctionComponent = () => {
           className={`card ${face}`}
           style={{
             boxShadow: usingMobileDevice
-              ? `rgba(0, 0, 0, 0.33) ${deviceLeftToRight}px ${deviceFrontToBack}px 20px`
+              ? `rgba(0, 0, 0, 0.33) ${deviceLeftToRight * 2}px ${
+                  deviceFrontToBack * 2
+                }px 20px`
               : "rgba(0, 0, 0, 0.33) 40px 40px 20px",
             // rotate our card in the X and Y plane depending on mouse position. Use the multiplier to cap the rotation
             transform:
@@ -400,7 +402,7 @@ const BusinessCard: FunctionComponent = () => {
                       usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
                     }%, ${
                       usingMobileDevice
-                        ? stylingConfig.colors.antiqueBrass
+                        ? stylingConfig.colors.tussock
                         : stylingConfig.colors.copper
                     },
                 ${stylingConfig.colors.craterBrown})`
@@ -415,7 +417,7 @@ const BusinessCard: FunctionComponent = () => {
                       usingMobileDevice ? 50 - deviceFrontToBack : radialCenterY
                     }%, ${
                       usingMobileDevice
-                        ? stylingConfig.colors.antiqueBrass
+                        ? stylingConfig.colors.tussock
                         : stylingConfig.colors.copper
                     },
                       ${stylingConfig.colors.craterBrown})`,

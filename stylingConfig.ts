@@ -8,7 +8,7 @@ const colors = {
   emperor: "#4F4F4F",
   tumbleweed: "#DBAC80",
   copper: "#ad7d34",
-  antiqueBrass: "#C99A6E",
+  tussock: "#D09258",
   craterBrown: "#462523",
 };
 
