@@ -265,7 +265,6 @@ const BusinessCard: FunctionComponent = () => {
 
   // if we're on a mobile device, set a listener on our device orientation
   useEffect(() => {
-    setTester((t) => t + 1);
     window.addEventListener("deviceorientation", (event): any => {
       // gamma: left to right
       const leftToRight = event.gamma;
@@ -397,7 +396,7 @@ const BusinessCard: FunctionComponent = () => {
                         : radialCenterX - (100 / 180) * extraXRotation
                     }% ${
                       usingMobileDevice ? deviceFrontToBack + 50 : radialCenterY
-                    }%, ${stylingConfig.colors.copper},
+                    }%, white,
                 ${stylingConfig.colors.craterBrown})`
                   : `radial-gradient(ellipse at ${
                       usingMobileDevice
@@ -408,7 +407,7 @@ const BusinessCard: FunctionComponent = () => {
                         : 100 - (100 / 180) * extraXRotation + radialCenterX
                     }% ${
                       usingMobileDevice ? deviceFrontToBack + 50 : radialCenterY
-                    }%, ${stylingConfig.colors.copper},
+                    }%, white,
                       ${stylingConfig.colors.craterBrown})`,
               color: "transparent",
               backgroundClip: "text",
