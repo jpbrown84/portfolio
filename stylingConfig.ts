@@ -17,4 +17,29 @@ const fonts = {
   openSans: `"Open Sans", sans-serif`,
 };
 
-export default { colors, fonts };
+const decentColors = {
+  blueGem: "#3A0CA3",
+  coconutCream: "#FAF5E4",
+  persianRose: "#F72585",
+  purple: "#7209B7",
+  spray: "#5FF2D9",
+  scorpion: "#5E5E5E",
+  mineShaft: "#2B2B2B",
+  nobel: "#B5B5B5",
+};
+
+const decentFonts = {
+  senilita: `"Senilita", sans-serif`,
+};
+
+const breakpoints: { [key: string]: number } = {
+  xxs: 320,
+  xs: 375,
+  s: 425,
+  m: 600,
+  l: 768,
+  xl: 1024,
+  xxl: 1400,
+};
+
+export default { colors, fonts, decentColors, decentFonts, breakpoints };
