@@ -1,12 +1,12 @@
 import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import css from "styled-jsx/css";
+import useViewportHeight from "../../../helpers/useViewportHeight";
 import stylingConfig from "../../../stylingConfig";
 
 const styles = css`
   .wrapper {
     width: 100%;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,8 +60,9 @@ const Magazine = ({
   backgroundColor: string;
   color: string;
 }) => {
+  const vh = useViewportHeight();
   return (
-    <div className="wrapper" style={{ backgroundColor }}>
+    <div className="wrapper" style={{ backgroundColor, minHeight: vh }}>
       <div className="text" style={{ color }}>
         Decent.
       </div>

@@ -120,7 +120,12 @@ const PageCarousel: FunctionComponent<PageCarouselProps> = ({
           type="button"
           className="selector"
           onClick={() => {
-            setRequestedPanel((curr) => (curr - 1) % children.length);
+            setRequestedPanel((curr) => {
+              if (curr === 0) {
+                return children.length - 1;
+              }
+              return curr - 1;
+            });
             setAnimationDisabled(true);
           }}
           disabled={transitionActive}

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import css from "styled-jsx/css";
+import useViewportHeight from "../../helpers/useViewportHeight";
 
 type MagazineOverlayProps = {
   transitionActive: boolean;
@@ -10,7 +11,6 @@ type MagazineOverlayProps = {
 
 const styles = css`
   .wrapper {
-    height: 100vh;
     width: 100%;
     position: fixed;
     top: 0;
@@ -29,8 +29,12 @@ const MagazineOverlay: FunctionComponent<MagazineOverlayProps> = ({
   transitionLength,
   colorSet,
 }: MagazineOverlayProps) => {
+  const vh = useViewportHeight();
   return (
-    <div className={`wrapper ${transitionActive ? "transitionActive" : ""}`}>
+    <div
+      className={`wrapper ${transitionActive ? "transitionActive" : ""}`}
+      style={{ minHeight: vh }}
+    >
       {colorSet.map((color, i) => (
         <div
           // we need the index in the key for duplicate colors.

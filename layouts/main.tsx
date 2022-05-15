@@ -183,6 +183,11 @@ const Main = ({ children }: { children: ReactChild }) => {
         }
         body {
           font-family: ${stylingConfig.fonts.openSans};
+          min-height: 100vh;
+          min-height: -webkit-fill-available;
+        }
+        html {
+          height: -webkit-fill-available;
         }
       `}</style>
     </div>

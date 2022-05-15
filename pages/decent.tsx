@@ -1,13 +1,10 @@
 import { NextPage } from "next";
 import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import css from "styled-jsx/css";
 import Magazine from "../components/decent/magazine/magazine";
 import PageCarousel from "../components/decent/pageCarousel";
 import Main from "../layouts/main";
 import stylingConfig from "../stylingConfig";
-
-const styles = css``;
 
 const DecentPage: NextPage = () => {
   return (
