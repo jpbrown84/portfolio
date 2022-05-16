@@ -2,11 +2,13 @@ import { Canvas, useThree } from "@react-three/fiber";
 import React from "react";
 import ReactDOM from "react-dom";
 import { AxesHelper } from "three";
+import useViewportHeight from "../../../helpers/useViewportHeight";
 import TextMesh from "./TextMesh";
 
 const TextCanvas = () => {
+  const vh = useViewportHeight();
   return ReactDOM.createPortal(
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div style={{ width: "100%", height: vh }}>
       <Canvas camera={{ position: [1, 1, 2], fov: 70, near: 0.1, far: 100 }}>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
