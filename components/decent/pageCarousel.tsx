@@ -16,6 +16,13 @@ type PageCarouselProps = {
 };
 
 const styles = css`
+  .panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
   .selectors {
     position: absolute;
     right: 20px;
@@ -24,6 +31,7 @@ const styles = css`
     background-color: ${stylingConfig.decentColors.coconutCream};
     padding: 20px 0;
     border-radius: 40px;
+    z-index: 10;
   }
   .selector {
     margin: 0 20px;
@@ -114,7 +122,16 @@ const PageCarousel: FunctionComponent<PageCarouselProps> = ({
         transitionLength={overlayTransitionLength}
         colorSet={transitionColorSet}
       />
-      {children?.map((child, i) => (currentPanel === i ? child : null))}
+      {children?.map((child, i) => (
+        <div
+          className="panel"
+          // eslint-disable-next-line react/no-array-index-key
+          key={`panel-${i}`}
+          style={{ visibility: currentPanel === i ? "visible" : "hidden" }}
+        >
+          {child}
+        </div>
+      ))}
       <div className="selectors">
         <button
           type="button"

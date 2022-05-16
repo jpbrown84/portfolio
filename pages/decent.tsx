@@ -3,6 +3,7 @@ import React from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Magazine from "../components/decent/magazine/magazine";
 import PageCarousel from "../components/decent/pageCarousel";
+import TextPanel from "../components/decent/Text3d/TextPanel";
 import Main from "../layouts/main";
 import stylingConfig from "../stylingConfig";
 
@@ -21,10 +22,7 @@ const DecentPage: NextPage = () => {
           backgroundColor={stylingConfig.decentColors.blueGem}
           color={stylingConfig.decentColors.coconutCream}
         />
-        <Magazine
-          backgroundColor={stylingConfig.decentColors.purple}
-          color={stylingConfig.decentColors.coconutCream}
-        />
+        <TextPanel />
         <Magazine
           backgroundColor={stylingConfig.decentColors.persianRose}
           color={stylingConfig.decentColors.coconutCream}

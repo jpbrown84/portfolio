@@ -16,6 +16,7 @@ const styles = css`
     top: 0;
     left: 0;
     pointer-events: none;
+    z-index: 1000;
   }
   .layer {
     position: absolute;
