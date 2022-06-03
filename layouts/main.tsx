@@ -6,6 +6,9 @@ const Main = ({ children }: { children: ReactNode }) => {
     <div className="body">
       {children}
       <style jsx global>{`
+        .body {
+          min-height: calc(100vh);
+        }
         html,
         body,
         div,

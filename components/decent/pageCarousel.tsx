@@ -21,6 +21,7 @@ const styles = css`
     left: 0;
     top: 0;
     width: 100%;
+    min-height: calc(100vh);
     z-index: 1;
   }
   .selectors {

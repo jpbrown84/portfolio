@@ -3,6 +3,7 @@ import { useLoader } from "@react-three/fiber";
 import React, { useMemo, useRef } from "react";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { Center, Text3D } from "@react-three/drei";
+import { MeshNormalMaterial } from "three";
 
 const TextMesh = ({ position }: { position: any }) => {
   // This reference will give us direct access to the mesh
@@ -35,6 +36,7 @@ const TextMesh = ({ position }: { position: any }) => {
         >
           DECENT
           <meshMatcapMaterial matcap={matcapTexture} />
+          {/* <meshNormalMaterial /> */}
         </Text3D>
       </Center>
     </mesh>

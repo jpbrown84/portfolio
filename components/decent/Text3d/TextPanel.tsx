@@ -13,6 +13,21 @@ const styles = css`
     min-height: 100vh;
     width: 100%;
     position: relative;
+    background: linear-gradient(
+        217deg,
+        ${stylingConfig.decentColors.coconutCream},
+        rgba(255, 0, 0, 0) 70.71%
+      ),
+      linear-gradient(
+        127deg,
+        ${stylingConfig.decentColors.spray},
+        rgba(0, 255, 0, 0) 70.71%
+      ),
+      linear-gradient(
+        336deg,
+        ${stylingConfig.decentColors.mineShaft},
+        rgba(0, 0, 255, 0) 70.71%
+      );
     background-color: ${stylingConfig.decentColors.spray};
   }
 `;
