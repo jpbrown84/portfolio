@@ -10,10 +10,13 @@ import React, {
 import ReactDOM from "react-dom";
 import { AxesHelper } from "three";
 import useViewportHeight from "../../../helpers/useViewportHeight";
+import useScreenWidth from "../../../hooks/useScreenWidth";
 import BubbleMesh from "./BubbleMesh";
 import TextMesh from "./TextMesh";
 
 const SceneCanvas = () => {
+  const screenWidth = useScreenWidth();
+
   const [currentAudioChannel, setCurrentAudioChannel] = useState(0);
 
   const bubblePopAudioSamples = useRef([
@@ -32,10 +35,18 @@ const SceneCanvas = () => {
     setCurrentAudioChannel((currentAudioChannel + 1) % 8);
   }, [currentAudioChannel]);
 
+  // camera position based on viewport size
+  let cameraPos = 1.5;
+  if (screenWidth < 769) {
+    cameraPos = 5;
+  }
+
   const vh = useViewportHeight();
   return ReactDOM.createPortal(
     <div style={{ width: "100%", height: vh }}>
-      <Canvas camera={{ position: [1.5, 1, 2], fov: 70, near: 0.1, far: 100 }}>
+      <Canvas
+        camera={{ position: [cameraPos, 1, 2], fov: 70, near: 0.1, far: 100 }}
+      >
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
         <TextMesh position={[0, 0, 0]} />
