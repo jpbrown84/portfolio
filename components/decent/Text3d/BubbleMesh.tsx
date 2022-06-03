@@ -107,17 +107,17 @@ const BubbleMesh: FunctionComponent<BubbleMeshProps> = ({
 
   // at each end of our Y scale, we'll set the opacity to fade to 0, so we don't get objects appearing and disappearing suddenly
   useEffect(() => {
-    if (yPos > 4) {
+    if (yPos > 3.5) {
       // if the bubble has been popped we dont want to show it
       if (isPopped) {
         return;
       }
       // else...
-      setOpacity((5 - yPos) * bubbleTransparency);
+      setOpacity((4.5 - yPos) * bubbleTransparency);
       return;
     }
-    if (yPos < -4) {
-      setOpacity((5 + yPos) * bubbleTransparency);
+    if (yPos < -3.5) {
+      setOpacity((4.5 + yPos) * bubbleTransparency);
       return;
     }
     // if the bubble has been popped we dont want to show it
@@ -131,13 +131,12 @@ const BubbleMesh: FunctionComponent<BubbleMeshProps> = ({
   }, [yPos, bubbleTransparency, opacity, isPopped]);
 
   const handlePop = () => {
-    // pass the pop up to the parent (for audio)
-    onPop();
-
     // hide our bubble
     setOpacity(0);
     // set the popped state to true
     setIsPopped(true);
+    // pass the pop up to the parent (for audio)
+    onPop();
   };
 
   return (

@@ -59,7 +59,7 @@ const SceneCanvas = () => {
           autoRotate
           autoRotateSpeed={0}
           minDistance={1}
-          maxDistance={10}
+          maxDistance={8}
         />
       </Canvas>
     </div>,
