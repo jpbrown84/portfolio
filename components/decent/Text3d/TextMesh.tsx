@@ -1,10 +1,8 @@
 /* eslint-disable no-return-assign */
-import { useFrame, useLoader } from "@react-three/fiber";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Vector3 } from "three";
+import { useLoader } from "@react-three/fiber";
+import React, { useMemo, useRef } from "react";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { Center, OrbitControls, Text3D } from "@react-three/drei";
-// import * as font from "/fonts/decent/helvetiker_regular.typeface.json";
 
 const TextMesh = ({ position }: { position: any }) => {
   // This reference will give us direct access to the mesh
@@ -39,7 +37,6 @@ const TextMesh = ({ position }: { position: any }) => {
           <meshMatcapMaterial matcap={matcapTexture} />
         </Text3D>
       </Center>
-      <OrbitControls autoRotate autoRotateSpeed={1} />
     </mesh>
   );
 };

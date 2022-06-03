@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import css from "styled-jsx/css";
 import stylingConfig from "../../../stylingConfig";
-import TextCanvas from "./TextCanvas";
+import TextCanvas from "./SceneCanvas";
 
 const styles = css`
   .wrapper {
