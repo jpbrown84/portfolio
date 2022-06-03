@@ -1,7 +1,7 @@
-import React, { ReactChild } from "react";
+import React, { ReactChild, ReactNode } from "react";
 import stylingConfig from "../stylingConfig";
 
-const Main = ({ children }: { children: ReactChild }) => {
+const Main = ({ children }: { children: ReactNode }) => {
   return (
     <div className="body">
       {children}

@@ -13,7 +13,7 @@ const styles = css`
     min-height: 100vh;
     width: 100%;
     position: relative;
-    background-color: ${stylingConfig.decentColors.coconutCream};
+    background-color: ${stylingConfig.decentColors.spray};
   }
 `;
 
