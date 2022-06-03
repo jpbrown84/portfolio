@@ -57,7 +57,7 @@ const SceneCanvas = () => {
         ))}
         <OrbitControls
           autoRotate
-          autoRotateSpeed={0}
+          autoRotateSpeed={1}
           minDistance={1}
           maxDistance={8}
         />
