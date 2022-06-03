@@ -24,7 +24,7 @@ const TextMesh = ({ position }: { position: any }) => {
     []
   );
 
-  const matcapTexture = useLoader(TextureLoader, "/textures/matcaps/5.png");
+  const matcapTexture = useLoader(TextureLoader, "/textures/matcaps/8.png");
 
   return (
     <mesh position={position} ref={mesh}>
