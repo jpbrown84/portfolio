@@ -55,7 +55,12 @@ const SceneCanvas = () => {
           // eslint-disable-next-line react/no-array-index-key
           <BubbleMesh key={`${x}-${i}`} onPop={handleBubblePop} />
         ))}
-        <OrbitControls autoRotate autoRotateSpeed={0} />
+        <OrbitControls
+          autoRotate
+          autoRotateSpeed={0}
+          minDistance={1}
+          maxDistance={10}
+        />
       </Canvas>
     </div>,
     document.getElementById("canvasWrapper")!
