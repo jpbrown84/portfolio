@@ -201,7 +201,7 @@ const styles = css`
     border-top-right-radius: 4px;
     overflow: hidden;
   }
-  .image img {
+  .image img.product {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -209,13 +209,12 @@ const styles = css`
     opacity: 0;
     transition: all 0.6s;
   }
-  .image img.active {
+  .image img.product.active {
     opacity: 1;
   }
   .ecoLandscape {
     position: absolute;
     bottom: 0;
-    left: 0;
     right: 0;
   }
   .ecoHill1 {
@@ -240,7 +239,7 @@ const styles = css`
     left: 13px;
     font-size: 11px;
   }
-  .ecoLandscape img {
+  .image img.ecoTree {
     position: absolute;
     top: -39px;
     right: 10px;
@@ -604,7 +603,12 @@ const ProductCard = () => {
             <div
               className={`ecoLandscape ${selectedOption.eco ? "" : "inactive"}`}
             >
-              <img src="/images/pine.png" alt="" height={20} />
+              <img
+                className="ecoTree"
+                src="/images/pine.png"
+                alt=""
+                height={20}
+              />
               <div
                 className={`ecoHill1 ${selectedOption.eco ? "" : "inactive"}`}
               >
@@ -619,7 +623,9 @@ const ProductCard = () => {
             </div>
             {options.map((option) => (
               <img
-                className={selectedOption.id === option.id ? "active" : ""}
+                className={
+                  selectedOption.id === option.id ? "product active" : "product"
+                }
                 key={`${option.id}-img`}
                 src={`/images/${selectedOption.img}`}
                 alt="Some product"
