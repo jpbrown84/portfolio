@@ -15,6 +15,7 @@ const colors = {
 const fonts = {
   courierPrime: `"Courier Prime", monospace`,
   openSans: `"Open Sans", sans-serif`,
+  montserrat: `"Montserrat", sans-serif`,
 };
 
 const decentColors = {

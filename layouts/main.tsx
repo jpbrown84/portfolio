@@ -1,14 +1,11 @@
-import React, { ReactChild, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import stylingConfig from "../stylingConfig";
 
 const Main = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="body">
+    <>
       {children}
       <style jsx global>{`
-        .body {
-          min-height: calc(100vh);
-        }
         html,
         body,
         div,
@@ -193,7 +190,7 @@ const Main = ({ children }: { children: ReactNode }) => {
           height: -webkit-fill-available;
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

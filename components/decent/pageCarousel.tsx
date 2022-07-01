@@ -99,6 +99,7 @@ const PageCarousel: FunctionComponent<PageCarouselProps> = ({
     // clear our timers in case of unmount
     return () => {
       clearTimeout(panelTimer);
+      clearTimeout(clearTransitionTimer);
     };
   }, [requestedPanel, currentPanel, transitionColorSet]);
 
