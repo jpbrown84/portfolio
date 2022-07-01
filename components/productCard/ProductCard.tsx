@@ -196,14 +196,21 @@ const styles = css`
   .image {
     height: 120px;
     position: relative;
-    overflow: hidden;
     background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     overflow: hidden;
+  }
+  .image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.6s;
+  }
+  .image img.active {
+    opacity: 1;
   }
   .ecoLandscape {
     position: absolute;
@@ -610,11 +617,15 @@ const ProductCard = () => {
                 className={`ecoHill3 ${selectedOption.eco ? "" : "inactive"}`}
               />
             </div>
-            <img
-              src={`/images/${selectedOption.img}`}
-              alt="Some product"
-              height={80}
-            />
+            {options.map((option) => (
+              <img
+                className={selectedOption.id === option.id ? "active" : ""}
+                key={`${option.id}-img`}
+                src={`/images/${selectedOption.img}`}
+                alt="Some product"
+                height={80}
+              />
+            ))}
           </div>
           <div className="brand">
             <button
