@@ -670,7 +670,11 @@ const ProductCard = () => {
                 className="iconButton"
                 type="button"
                 aria-label="Click"
-                onClick={() => setAmount(amount - 1)}
+                onClick={() => {
+                  if (amount > 0) {
+                    setAmount(amount - 1);
+                  }
+                }}
               >
                 <img
                   src="/icons/decent/minus.svg"
